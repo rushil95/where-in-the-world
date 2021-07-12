@@ -1,8 +1,12 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import CountryCard from "./CountryCard/CountryCard";
-import { selectAllCountries, selectFilteredCountries } from "./countriesSlice";
-import styled from "styled-components/macro";
+import React from 'react'
+import { useSelector } from 'react-redux'
+import CountryCard from './CountryCard/CountryCard'
+import {
+  selectCountriesLoadingStatus,
+  selectFilteredCountries,
+} from './countriesSlice'
+import styled from 'styled-components/macro'
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 
 const Container = styled.div`
   margin-top: 40px;
@@ -17,15 +21,19 @@ const Container = styled.div`
     column-gap: 0;
     justify-content: center;
   }
-`;
+`
 
 export default function Countries() {
-  const countries = useSelector(selectFilteredCountries);
-  console.log("Countries render");
+  const countries = useSelector(selectFilteredCountries)
+  const requestStatus = useSelector(selectCountriesLoadingStatus)
+
+  if (requestStatus === 'loading') {
+    return <LoadingSpinner />
+  }
   return (
     <Container>
       {countries.map((country) => {
-        const { name, flag, population, region, capital } = country;
+        const { name, flag, population, region, capital } = country
         return (
           <CountryCard
             key={name}
@@ -35,8 +43,8 @@ export default function Countries() {
             region={region}
             capital={capital}
           />
-        );
+        )
       })}
     </Container>
-  );
+  )
 }

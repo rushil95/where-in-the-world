@@ -9,6 +9,8 @@ const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding-bottom: 50px;
+  display : grid;
+  grid-template-rows : auto 1fr;
 `;
 
 const FiltersSection = styled.div`

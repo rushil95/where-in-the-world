@@ -24,6 +24,10 @@ body{
     font-size : 14px;
 }
 
+html,body{
+    height : 100%;
+}
+
 ul{
     list-style-type : none;
 }
@@ -31,6 +35,8 @@ ul{
 a{
     text-decoration : none;
 }
+
+
 `;
 
 export default Reset;
