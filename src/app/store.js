@@ -1,8 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import themeReducer from "../features/Theme/themeSlice";
+import countriesReducer from "../features/Countries/countriesSlice"
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    theme: themeReducer,
+    countries : countriesReducer
   },
 });
+
+export default store;
