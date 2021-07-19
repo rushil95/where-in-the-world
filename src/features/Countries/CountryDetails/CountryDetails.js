@@ -182,7 +182,6 @@ function CountryDetails(props) {
     flag,
   } = countryInfo
 
-  //const countriesLoadingStatus = useSelector(selectCountriesLoadingStatus);
 
   const borderCountryNames = useSelector((state) =>
     selectNamesConvertedFromCode(state, borders),
@@ -204,9 +203,7 @@ function CountryDetails(props) {
   }, [name])
 
   if (requestStatus === requestStatuses.loading) {
-    return (
-     <LoadingSpinner/>
-    )
+    return <LoadingSpinner />
   }
 
   return (
