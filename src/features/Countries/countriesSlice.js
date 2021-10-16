@@ -17,7 +17,7 @@ const initialState = {
     name: "",
     region: "",
   },
-  entities: [],
+  entities: {},
   status: "",
 };
 
@@ -49,7 +49,7 @@ const countriesSlice = createSlice({
     [fetchCountries.fulfilled]: (state, action) => {
       const entities = {};
       action.payload.forEach((country) => {
-        entities[country.alpha3Code] = country;
+        entities[country.cca3] = country;
       });
       state.entities = entities;
       state.status = statusValues.success;
@@ -73,12 +73,12 @@ export const selectFilteredCountries = createSelector(
 
     if(filterRegion === ''){
       return  countries.filter((country) => {  
-        return country.name.toLowerCase().includes(searchText);
+        return country.name.common.toLowerCase().includes(searchText);
       });
     }
     return countries.filter((country) => {
       const regionMatches = country.region.toLowerCase() === filterRegion;
-      const nameMatches = country.name.toLowerCase().includes(searchText);
+      const nameMatches = country.name.common.toLowerCase().includes(searchText);
       return regionMatches && nameMatches
     });
   }
@@ -87,9 +87,7 @@ export const selectFilteredCountries = createSelector(
 export const selectNamesConvertedFromCode = (state, arrayOfCodes) => {
   if (state.countries.status === statusValues.success) {
     return arrayOfCodes.map((code) => {
-      console.log(code);
-      console.log(state.countries.entities);
-      return state.countries.entities[code].name;
+      return state.countries.entities[code].name.common;
     });
   }
   return arrayOfCodes;

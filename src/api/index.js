@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = " https://restcountries.eu/rest/v2";
+const baseURL = " https://restcountries.com/v3.1";
 
 const axiosInstance = axios.create({ baseURL });
 
